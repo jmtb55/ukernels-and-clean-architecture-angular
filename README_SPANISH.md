@@ -1,7 +1,7 @@
-This project was generated with Angular CLI version 8.3.23.
-Architected, Documented And Developed by Jesus Miguel Tenias Belmonte
-While working as Front-End developer @ Experis Peru (staffing consultant) / DXC (Software Factory Client)
-As part of a DXC company-wide knowledge sharing initiative
+Este Proyecto fue generado por Angular CLI version 8.3.23.
+Este proyecto fue concebido, documentado y desarrollado por Jesus Miguel Tenias Belmonte
+Trabajando en @ Experis Peru (consultora de personal IT) / DXC (Cliente)
+Como parte de una iniciativa de intercambio de conocimientos en toda la empresa DXC.
 
 #### MicroKernels
 
