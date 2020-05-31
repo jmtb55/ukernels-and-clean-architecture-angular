@@ -1,0 +1,58 @@
+:host,
+#content-wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  max-height: 100%;
+  overflow-y: hidden;
+}
+
+#content-wrapper {
+  padding: 22px;
+  background-color: white;
+}
+
+#layout-wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+  max-width: 1000px;
+  margin: 22px 0;
+  width: 100%;
+  max-height: 100%;
+  overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+#menu-bar {
+  background-color: rgb(171, 19, 27);
+}
+
+#footer {
+  font-size: 14px;
+  background-color: rgb(15, 150, 117);
+}
+
+#footer, #menu-bar {
+  display: flex;
+  flex: 0 0 42px;
+  flex-direction: column;
+  position: relative;
+  overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+  color: white;
+  font-family: cornerstone;
+}
+
+#logo {
+  margin-top: 22px;
+  height: 100px;
+  width: auto;
+}

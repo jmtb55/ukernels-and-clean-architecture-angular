@@ -17,6 +17,9 @@ export interface EnvironmentModel {
      * Base URL, precedes context. Refers to the domain and usually any port, api name and version.
      */
     host: string;
+    /**
+     * url tokens for each context
+     */
     contexts: {
       /**
        * Authentication, Authorization and related context base URL
@@ -30,6 +33,10 @@ export interface EnvironmentModel {
        * Orders context base url
        */
       orders: string;
+      /**
+       * Toppings context base url
+       */
+      pizzaToppings: string;
     }
   }
 
@@ -41,11 +48,12 @@ export interface EnvironmentModel {
 export const defaultEnvironment: EnvironmentModel = {
   isProductionBuild: true,
   backend: {
-    host: '',
+    host: 'https://ukernels-and-clean-architecture-angular.getsandbox.com:443',
     contexts: {
       authentication: '',
       orders: '',
-      products: ''
+      products: '',
+      pizzaToppings: 'api/pizza-toppings/v0'
     }
   }
 }
