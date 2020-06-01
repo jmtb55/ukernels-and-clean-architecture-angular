@@ -38,7 +38,7 @@ export class PizzaToppingModelAdapter extends GenericOptionModelAdapter implemen
 
   private _adaptFrom(adaptee: any) {
     if (adaptee.name && typeof name === 'string') {
-      this.svgFileName = `${adaptee.name.toLowercase()}.svg`;
+      this.svgFileName = `${adaptee.name.toLowerCase()}.svg`;
     }
   }
 

@@ -52,7 +52,7 @@ export const defaultEnvironment: EnvironmentModel = {
     contexts: {
       authentication: '',
       orders: '',
-      products: '',
+      products: 'api/pizza/v0',
       pizzaToppings: 'api/pizza-toppings/v0'
     }
   }

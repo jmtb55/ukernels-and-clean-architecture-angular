@@ -1,0 +1,15 @@
+<div class="pizza" *ngIf="loaded && _product" (click)="onEditButtonClick()" title="Editar Pizza">
+  <img class="pizza-base" src="/assets/img/base-pizza.svg" [style.zIndex]="1"/>
+  <ng-container *ngIf="_product.toppings && _product.toppings.length">
+    <img 
+      *ngFor="let topping of _product.toppings; let i = index"
+      src="/assets/img/pizza-toppings/{{ topping.svgFileName }}" 
+      [style.zIndex]="2 + i"
+      class="pizza-topping"
+      @drop/>
+  </ng-container>
+</div>
+<div class="pizza-text">
+  {{name}}
+  <img src="/assets/img/edit.svg" (click)="onEditButtonClick()" title="Editar Pizza"/>
+</div>

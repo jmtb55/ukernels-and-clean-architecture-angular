@@ -1,1 +1,8 @@
-<p>list works!</p>
+<div class="products-list" *ngIf="loaded">
+  <ng-container *ngIf="products && products.length">
+    <app-single-product-component
+      *ngFor="let product of products"
+      [product]="product">
+    </app-single-product-component>
+  </ng-container>
+</div>

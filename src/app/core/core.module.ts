@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CoreComponentsModule } from './components/core-components.module';
 import { HomeComponent } from './components/home/home.component';
 import { RouterModule } from '@angular/router';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   exports: [
-    HomeComponent
+    HomeComponent,
+    MenuComponent
   ]
 })
 export class CoreModule { }

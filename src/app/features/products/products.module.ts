@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsFeatureComponent } from './products.component';
 import { ProductsComponentsModule } from './commons/components/products-components.module';
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { ProductsListViewComponent } from './views/products-list/products-list.component';
 import { ProductsSingleViewComponent } from './views/products-single/products-single.component';
 
@@ -39,9 +39,11 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
     ProductsComponentsModule
   ],
   exports: [
+    RouterModule,
     ProductsFeatureComponent,
     ProductsListViewComponent,
     ProductsSingleViewComponent

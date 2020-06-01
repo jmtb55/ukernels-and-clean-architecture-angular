@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+.products-list {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: row;
+  margin: 22px;
+  position: relative;
+  overflow-y: auto;
+  flex-wrap: wrap;
+  max-height: 406px;
+}
+
+.products-list > app-single-product-component {
+  margin: 0 112px;
+}

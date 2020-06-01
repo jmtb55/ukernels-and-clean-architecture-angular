@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app-routing';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.
   imports: [
     CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     CoreModule,
     /**
      * Hash in routes improves consistency of behavior on deployments.

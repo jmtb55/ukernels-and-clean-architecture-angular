@@ -5,18 +5,18 @@ As part of a DXC company-wide knowledge sharing initiative
 
 #### MicroKernels
 
-El patrón arquitectónico *MicroKernels* (algunas veces llamado arquitectura plug-in) divide la lógica en dos (2) partes:
+Architectural pattern *MicroKernels* (aka plug-in) splits logic in two:
 
 ![MicroKernels](./src/assets/img/readme/microkernels.png)
 
 
 
-- **Core**: Agrupa sólo el código estrictamente necesario para que funcione el sistema con cada uno de sus módulos, lo que sería el código común.
-- **Característica ó Módulo ó Feature**: Agrupa el código relacionado a un solo módulo. El cual debe ser totalmente independiente de otro Módulo.
+- **Core**: Common code, not related to any single module.
+- **Feature or Module**: Code related to a single module, these modules must not be a dependency to one another.
 
-Bajo este patrón se reduce el impacto de un cambio en una característica, puesto que una característica tiene que ser independiente de la otra. Necesariamente esto implica un cierto nivel controlado de repetición de código.
+This pattern reduces efforts upon dealing with changes, given that all features are not dependant on one another. This implies some redundancy or code repetition.
 
-A nivel de organización de los archivos del proyecto, se refleja una estructura de carpetas y archivos acorde a la teoría, en el nivel mas alto la estructura es:
+This pattern will reflect itself on a folder structure such as:
 
 ```bash
 ├── core
@@ -32,15 +32,14 @@ A nivel de organización de los archivos del proyecto, se refleja una estructura
 
 #### Clean Architecture
 
-El patrón arquitectónico *Clean Architecture* es un patrón basado en capas, donde el código se modela partiendo del criterio en que las capas inferiores no son conscientes de los detalles de las capas superiores.
+The *Clean Architecture* pattern is a layered architecture; each layer is modeled on the basis of lower layers being unaware of details from upper layers.
 
-En esta primera ilustración se observa una estructura bastante general y posiblemente mas orientada a backend, que si bien es referencial, no se ajusta perfectamente a lo que se plantea para angular.
+The following image is a generally agreed upon graphical description of your average clean architecture layers, but as such, is not a perfect fit for an angular project.
 
 ![CleanArchitecture](./src/assets/img/readme/clean-architecture.png)
 
 
-
-Se consideraron las siguientes capas en orden descendente (de mas externo a mas interno):
+A more fitting implementation is detailed as follows:
 
 1. **UI**: Abarca todo el código en los archivos de extensión HTML y CSS, comprende todo el código necesario para visualizar la interfaz de usuario con la mínima lógica prestacional posible.
 2. **Controlador**: Abarca los archivos .ts de cada componente angular, debe incluir sólo la lógica necesaria para renderizar la interfaz, delegando el procesamiento al presenter. Tanto el controlador como el presenter están en la misma capa por lo tanto pueden acceder uno a otro y se conocen a través de sus atributos públicos.
