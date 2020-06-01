@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'cornerstone';
+  src: url('assets/fonts/cornerstone.woff2') format('woff2'),
+    url('assets/fonts/cornerstone.woff') format('woff');
+}
+
+/*
+In order to fix complex layout issues,
+scrollbar should be enabled on a single component at any one time
+there will be no more than 1 scrollbar in the screen at any one time
+*/
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-width: 100%;
+  min-height: 100%; 
+}

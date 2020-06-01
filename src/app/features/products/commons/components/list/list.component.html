@@ -1,0 +1,12 @@
+<div class="action">
+  <button (click)="onNewPizzaButtonClick()">Nueva Pizza</button>
+</div>
+<div class="products-list" *ngIf="loaded">
+  <ng-container *ngIf="products && products.length">
+    <app-product-pizza-display-component
+      *ngFor="let product of products"
+      [product]="product"
+      (edit)="onEditButtonClick($event)">
+    </app-product-pizza-display-component>
+  </ng-container>
+</div>

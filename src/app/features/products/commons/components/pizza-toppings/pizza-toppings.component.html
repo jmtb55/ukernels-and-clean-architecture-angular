@@ -1,0 +1,15 @@
+<div class="toppings" *ngIf="_toppings && _toppings.length">
+  <ng-container *ngFor="let topping of _toppings; let i = index">
+    <div [ngClass]="{
+      'topping-single': true,
+      'selected': topping.selected
+    }"
+    (click)="toggleSelection(topping)">
+      <img 
+      src="/assets/img/pizza-toppings/singles/{{ topping.svgFileName }}"/>
+      <div class="text">
+        {{topping.label}}
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  max-height: 100%;
+  overflow-y: hidden;
+  margin: 0 44px;
+  justify-content: center;
+}
+
+img {
+  max-height: 150px;
+}
+
+p {
+  margin-left: 44px;
+  font-family: cornerstone;
+  font-size: 44px;
+  color: #555;
+}

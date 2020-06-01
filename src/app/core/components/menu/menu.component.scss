@@ -1,0 +1,32 @@
+$green: rgb(15, 150, 117);
+
+:host {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  margin: 0 22px;
+  align-items: center;
+}
+
+.menu-items {
+  a {
+    margin-right: 22px;
+    color: white;
+    letter-spacing: 0.33px;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  a:hover {
+    color: $green;
+    text-decoration: underline;
+  }
+  a:active {
+    color: darken($green, 10%);
+  }
+}
+
+img {
+  max-height: 22px;
+  width: auto;
+  cursor: pointer;
+}

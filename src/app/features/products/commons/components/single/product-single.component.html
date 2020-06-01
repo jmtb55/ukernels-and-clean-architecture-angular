@@ -1,0 +1,24 @@
+<div class="visualization-wrapper">
+  <app-product-pizza-display-component
+    [product]="product"
+    [enableEditAction]="false">
+  </app-product-pizza-display-component>
+</div>
+<form
+  *ngIf="!loading && pizzaFormGroup"
+  [formGroup]="pizzaFormGroup">
+  <div class="pizza-name">
+    Nombre de Pizza:
+    <input type="text" placeholder="ejm Pepperoni" [formControl]="pizzaNameFormControl"/>
+  </div>
+</form>
+<div class="toppings-wrapper" *ngIf="toppings && toppings.length && product && product.toppings">
+  <app-product-pizza-toppings-component
+    [toppings]="toppings"
+    [initialSelection]="product.toppings"
+    (change)="onToppingsSelectionChange($event)">
+  </app-product-pizza-toppings-component>
+</div>
+<div class="action" *ngIf="toppings && toppings.length && product && product.toppings">
+  <button [disabled]="loading" (click)="submit()">{{submitButtonText}}</button>
+</div>
