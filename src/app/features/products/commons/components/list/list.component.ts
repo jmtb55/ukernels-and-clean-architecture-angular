@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { PizzaModel } from '../../domain/pizza/pizza.model';
 import { ProductsListPresenterService } from '../../presenters/products-list-presenter.service';
+import { Router } from '@angular/router';
 
 // use of an interface prevents cyclic dependency problems
 export interface ProductListComponentInterface {
@@ -22,8 +23,9 @@ export class ProductsListComponent implements ProductListComponentInterface {
   products: PizzaModel[];
 
   constructor(
-    private readonly changeDetectorRef: ChangeDetectorRef,
-    private readonly presenter?: ProductsListPresenterService
+    private readonly router: Router,
+    private readonly presenter: ProductsListPresenterService,
+    private readonly changeDetectorRef: ChangeDetectorRef
   ) {
     this.loaded = false;
     this.loading = false;
@@ -31,9 +33,7 @@ export class ProductsListComponent implements ProductListComponentInterface {
   }
 
   ngOnInit(): void {
-    if (this.presenter) {
-      this.presenter.controller = this;
-    }
+    this.presenter.controller = this;
   }
 
   public refreshRender(): void {
@@ -47,6 +47,14 @@ export class ProductsListComponent implements ProductListComponentInterface {
       },
       17
     );
+  }
+
+  onNewPizzaButtonClick(): void {
+    this.router.navigate(['/products/pizza/new']);
+  }
+
+  onEditButtonClick(model: PizzaModel): void {
+    this.router.navigate([`/products/pizza/${model.id}`]);
   }
 
 }

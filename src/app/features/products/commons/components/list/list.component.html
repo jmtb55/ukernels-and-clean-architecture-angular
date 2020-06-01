@@ -1,8 +1,12 @@
+<div class="action">
+  <button (click)="onNewPizzaButtonClick()">Nueva Pizza</button>
+</div>
 <div class="products-list" *ngIf="loaded">
   <ng-container *ngIf="products && products.length">
     <app-single-product-component
       *ngFor="let product of products"
-      [product]="product">
+      [product]="product"
+      (edit)="onEditButtonClick($event)">
     </app-single-product-component>
   </ng-container>
 </div>

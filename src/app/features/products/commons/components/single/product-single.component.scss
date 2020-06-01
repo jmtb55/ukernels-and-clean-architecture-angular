@@ -18,6 +18,20 @@
   
 }
 
+.topping-single {
+  width: fit-content;
+  justify-content: center;
+  img {
+    width: 22px;
+    height: auto;
+  }
+  .text {
+    font: cornerstone;
+    color: #333;
+    font-size: 12px;
+  }
+}
+
 .pizza img {
   position: absolute;
   top: 0;

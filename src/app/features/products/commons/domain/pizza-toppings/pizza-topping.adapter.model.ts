@@ -25,12 +25,18 @@ export class PizzaToppingModelAdapter extends GenericOptionModelAdapter implemen
   svgFileName: string;
 
   /**
+   * Used for some frontend logic only.
+   */
+  selected: boolean;
+
+  /**
    * AutocompleteAdapter class constructor.
    * @param adaptee data in a known format
    */
   constructor(adaptee: any) {
     super(adaptee);
     this.svgFileName = '';
+    this.selected = false;
     if (adaptee) {
       this._adaptFrom(adaptee);
     } 

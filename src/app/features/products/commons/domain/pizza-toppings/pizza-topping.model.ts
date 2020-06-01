@@ -11,4 +11,9 @@ export interface PizzaToppingModel extends GenericOptionModel {
    * (label might not match our available file names)
    */
   svgFileName: string;
+
+  /**
+   * Used for some frontend logic only.
+   */
+  selected: boolean;
 }

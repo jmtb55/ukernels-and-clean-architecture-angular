@@ -1,9 +1,12 @@
-import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, Output, EventEmitter } from "@angular/core";
+import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef, Output, EventEmitter, OnInit } from "@angular/core";
 import { PizzaModel } from '../../domain/pizza/pizza.model';
 
 export type ProductSingleComponentMode = 'minimal' | 'create' | 'update';
 
 import { transition, style, animate, trigger } from '@angular/animations';
+import { ProductSinglePresenterService } from '../../presenters/product-single-presenter.service';
+import { PizzaToppingModel } from '../../domain/pizza-toppings/pizza-topping.model';
+import { FormGroup, FormControl } from '@angular/forms';
 
 export const DROP_ANIMATION = trigger('drop', [
   transition(':enter', [
@@ -28,6 +31,9 @@ export interface ProductSingleComponentInterface {
   loading: boolean;
   mode?: ProductSingleComponentMode;
   product?: PizzaModel;
+  toppings?: PizzaToppingModel[];
+  pizzaFormGroup?: FormGroup;
+  pizzaNameFormControl?: FormControl;
   refreshRender(): void;
 }
 
@@ -37,7 +43,12 @@ export interface ProductSingleComponentInterface {
   styleUrls: ['./product-single.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [DROP_ANIMATION],
-}) export class ProductSingleComponent implements ProductSingleComponentInterface {
+}) export class ProductSingleComponent implements ProductSingleComponentInterface, OnInit {
+
+  pizzaFormGroup?: FormGroup;
+  pizzaNameFormControl?: FormControl;
+
+  toppings?: PizzaToppingModel[];
 
   @Output() edit: EventEmitter<PizzaModel>;
 
@@ -56,21 +67,23 @@ export interface ProductSingleComponentInterface {
   _product: PizzaModel;
   @Input() public set product(product: undefined | PizzaModel) {
     this._product = product;
-    if (this._product) {
-      this.loaded = true;
-    }
-    this.refreshRender();
+    this.presenter.product = product;
   }
   public get product(): undefined | PizzaModel {
     return this._product;
   }
 
   constructor(
+    private readonly presenter: ProductSinglePresenterService,
     private readonly changeDetectorRef: ChangeDetectorRef
   ) {
     this.edit = new EventEmitter();
     this.loaded = false;
     this.loading = false;
+  }
+
+  ngOnInit(): void {
+    this.presenter.controller = this;
   }
 
   public refreshRender(): void {

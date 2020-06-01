@@ -1,4 +1,8 @@
-<div class="pizza" *ngIf="loaded && _product" (click)="onEditButtonClick()" title="Editar Pizza">
+<div
+  *ngIf="loaded && _product"
+  class="pizza"
+  (click)="this._mode === 'minimal' ? onEditButtonClick() : null"
+  [title]="this._mode === 'minimal' ? 'Editar Pizza': null">
   <img class="pizza-base" src="/assets/img/base-pizza.svg" [style.zIndex]="1"/>
   <ng-container *ngIf="_product.toppings && _product.toppings.length">
     <img 
@@ -9,7 +13,26 @@
       @drop/>
   </ng-container>
 </div>
-<div class="pizza-text">
+<div
+  *ngIf="loaded && this._mode === 'minimal'"
+  class="pizza-text">
   {{name}}
   <img src="/assets/img/edit.svg" (click)="onEditButtonClick()" title="Editar Pizza"/>
 </div>
+<form
+  *ngIf="this._mode !== 'minimal' && !loading"
+  [formGroup]="pizzaFormGroup">
+  <div class="pizza-name">
+    <input type="text" placeholder="ejm Pepperoni" [formControl]="pizzaNameFormControl"/>
+  </div>
+  <div class="toppings" *ngIf="toppings && toppings.length">
+    <div class="topping-single"
+    *ngFor="let topping of toppings; let i = index">
+      <img 
+      src="/assets/img/pizza-toppings/singles/{{ topping.svgFileName }}"/>
+      <div class="text">
+        {{topping.label}}
+      </div>
+    </div>
+  </div>
+</form>

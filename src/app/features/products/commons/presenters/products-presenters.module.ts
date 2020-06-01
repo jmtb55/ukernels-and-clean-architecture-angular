@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsListPresenterService } from './products-list-presenter.service';
 import { ProductsDomainModule } from '../domain/products-domain.module';
+import { ProductSinglePresenterService } from './product-single-presenter.service';
 
 @NgModule({
   imports: [
@@ -9,7 +10,8 @@ import { ProductsDomainModule } from '../domain/products-domain.module';
     ProductsDomainModule
   ],
   providers: [
-    ProductsListPresenterService
+    ProductsListPresenterService,
+    ProductSinglePresenterService
   ]
 })
 export class ProductsPresentersModule { }

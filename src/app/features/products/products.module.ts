@@ -20,11 +20,11 @@ const routes: Routes = [
         component: ProductsListViewComponent
       },
       {
-        path: 'single',
+        path: 'pizza/new',
         component: ProductsSingleViewComponent
       },
       {
-        path: 'unico',
+        path: 'pizza/:id',
         component: ProductsSingleViewComponent
       },
     ],

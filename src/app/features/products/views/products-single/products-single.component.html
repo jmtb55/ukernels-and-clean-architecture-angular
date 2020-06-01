@@ -1,1 +1,5 @@
-<p>product single view works!</p>
+<app-single-product-component
+  *ngIf="product !== undefined"
+  [product]="product"
+  [mode]="productMode">
+</app-single-product-component>

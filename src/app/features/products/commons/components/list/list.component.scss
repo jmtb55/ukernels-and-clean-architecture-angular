@@ -1,3 +1,5 @@
+$green: rgb(15, 150, 117);
+
 :host {
   display: flex;
   flex: 1;
@@ -19,5 +21,23 @@
 }
 
 .products-list > app-single-product-component {
-  margin: 0 112px;
+  margin-right: 22px
+}
+
+.action {
+  margin-top: 22px;
+  margin-left: 22px;
+  button {
+    cursor: pointer;
+    height: 22px;
+    border: 0;
+    background-color: darken($green, 15%);
+    border-radius: 4px;
+    font-family: cornerstone;
+    font-size: 12px;
+    color: white;
+  }
+  button:hover {
+    background-color: $green;
+  }
 }
