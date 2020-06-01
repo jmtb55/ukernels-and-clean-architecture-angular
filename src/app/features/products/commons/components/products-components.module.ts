@@ -4,11 +4,15 @@ import { ProductsListComponent } from './list/list.component';
 import { ProductsPresentersModule } from '../presenters/products-presenters.module';
 import { ProductSingleComponent } from './single/product-single.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductPizzaDisplayComponent } from './pizza-display/pizza-display.component';
+import { ProductPizzaToppingsComponent } from './pizza-toppings/pizza-toppings.component';
 
 @NgModule({
   declarations: [
+    ProductPizzaDisplayComponent,
     ProductSingleComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    ProductPizzaToppingsComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     ProductsListComponent,
-    ProductSingleComponent
+    ProductSingleComponent,
+    ProductPizzaDisplayComponent,
+    ProductPizzaToppingsComponent
   ]
 })
 export class ProductsComponentsModule { }

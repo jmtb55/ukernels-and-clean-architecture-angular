@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PizzaModel } from '../../commons/domain/pizza/pizza.model';
-import { ProductSingleComponentMode } from '../../commons/components/single/product-single.component';
 import { take } from 'rxjs/operators';
 import { PizzaAdapterModel } from '../../commons/domain/pizza/pizza.adapter.model';
+import { CrudAction } from '../../commons/components/single/product-single.component';
 
 @Component({
   templateUrl: './products-single.component.html',
@@ -12,18 +12,18 @@ import { PizzaAdapterModel } from '../../commons/domain/pizza/pizza.adapter.mode
 export class ProductsSingleViewComponent implements OnInit {
 
   product: null | PizzaModel;
-  productMode: ProductSingleComponentMode;
+  action: CrudAction;
 
   constructor(
     private route: ActivatedRoute
   ) {
     this.product = undefined;
-    this.productMode = "minimal";
+    this.action = "create";
   }
 
   ngOnInit() {
     this.product = undefined;
-    this.productMode = "minimal";
+    this.action = "create";
     this.route.params.pipe(
       take(1)
     ).subscribe(
@@ -32,10 +32,10 @@ export class ProductsSingleViewComponent implements OnInit {
           this.product = new PizzaAdapterModel({
             id: params.id
           });
-          this.productMode = "update";
+          this.action = "update";
         } else {
           this.product = new PizzaAdapterModel({});
-          this.productMode = "create";
+          this.action = "create";
         }
       }
     )

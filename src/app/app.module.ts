@@ -9,6 +9,7 @@ import { appRoutes } from './app-routing';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
+    SimpleNotificationsModule.forRoot(),
     /**
      * Hash in routes improves consistency of behavior on deployments.
      */

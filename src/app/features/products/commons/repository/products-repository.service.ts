@@ -47,7 +47,7 @@ import { PizzaEntity } from './pizza/pizza.entity';
     const URL = `${environment.backend.host}/${environment.backend.contexts.products}/${body.id}`;
     const OPTIONS = this.getStandardOptions();
     delete body.id;
-    return this.httpClient.post<PizzaEntity>(
+    return this.httpClient.put<PizzaEntity>(
       URL,
       body,
       OPTIONS

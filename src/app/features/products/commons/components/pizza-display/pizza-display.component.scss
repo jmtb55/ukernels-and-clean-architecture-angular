@@ -1,0 +1,60 @@
+:host,
+.pizza {
+  display: inline-block;
+  width: 225px;
+  height: 203px;
+  position: relative;
+}
+
+.pizza {
+  height: 159px;
+}
+
+.pizza-base {
+
+}
+
+.pizza-topping {
+  
+}
+
+.toppings {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.topping-single {
+  width: fit-content;
+  justify-content: center;
+  img {
+    width: 22px;
+    height: auto;
+  }
+  .text {
+    font: cornerstone;
+    color: #333;
+    font-size: 12px;
+  }
+}
+
+.pizza img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pizza-text {
+  font-family: cornerstone;
+  color: #333;
+  font-size: 22px;
+  text-align: center;
+}
+
+.pizza-text > img {
+  cursor: pointer;
+  height: 18px;
+}
+
+.pizza {
+  cursor: pointer;
+}

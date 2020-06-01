@@ -1,38 +1,24 @@
-<div
-  *ngIf="loaded && _product"
-  class="pizza"
-  (click)="this._mode === 'minimal' ? onEditButtonClick() : null"
-  [title]="this._mode === 'minimal' ? 'Editar Pizza': null">
-  <img class="pizza-base" src="/assets/img/base-pizza.svg" [style.zIndex]="1"/>
-  <ng-container *ngIf="_product.toppings && _product.toppings.length">
-    <img 
-      *ngFor="let topping of _product.toppings; let i = index"
-      src="/assets/img/pizza-toppings/{{ topping.svgFileName }}" 
-      [style.zIndex]="2 + i"
-      class="pizza-topping"
-      @drop/>
-  </ng-container>
-</div>
-<div
-  *ngIf="loaded && this._mode === 'minimal'"
-  class="pizza-text">
-  {{name}}
-  <img src="/assets/img/edit.svg" (click)="onEditButtonClick()" title="Editar Pizza"/>
+<div class="visualization-wrapper">
+  <app-product-pizza-display-component
+    [product]="product"
+    [enableEditAction]="false">
+  </app-product-pizza-display-component>
 </div>
 <form
-  *ngIf="this._mode !== 'minimal' && !loading"
+  *ngIf="this._mode !== 'minimal' && !loading && pizzaFormGroup"
   [formGroup]="pizzaFormGroup">
   <div class="pizza-name">
+    Nombre de Pizza:
     <input type="text" placeholder="ejm Pepperoni" [formControl]="pizzaNameFormControl"/>
   </div>
-  <div class="toppings" *ngIf="toppings && toppings.length">
-    <div class="topping-single"
-    *ngFor="let topping of toppings; let i = index">
-      <img 
-      src="/assets/img/pizza-toppings/singles/{{ topping.svgFileName }}"/>
-      <div class="text">
-        {{topping.label}}
-      </div>
-    </div>
-  </div>
 </form>
+<div class="toppings-wrapper" *ngIf="toppings && toppings.length && product && product.toppings">
+  <app-product-pizza-toppings-component
+    [toppings]="toppings"
+    [initialSelection]="product.toppings"
+    (change)="onToppingsSelectionChange($event)">
+  </app-product-pizza-toppings-component>
+</div>
+<div class="action" *ngIf="toppings && toppings.length && product && product.toppings">
+  <button [disabled]="loading" (click)="submit()">{{submitButtonText}}</button>
+</div>

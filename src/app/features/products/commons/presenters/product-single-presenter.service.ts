@@ -7,8 +7,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PizzaToppingsDomainService } from '../domain/pizza-toppings/pizza-toppings.domain.service';
 import { PizzaToppingModel } from '../domain/pizza-toppings/pizza-topping.model';
 import { FormControl, FormGroup } from '@angular/forms';
+import { PizzaAdapterModel } from '../domain/pizza/pizza.adapter.model';
+import { Subscription } from 'rxjs';
+import { NotificationsService as ToasterNotificationsService } from 'angular2-notifications';
+import { Router } from '@angular/router';
 
 @Injectable() export class ProductSinglePresenterService {
+
+  private productNameChangeSubscription?: Subscription;
 
   private _controller?: ProductSingleComponentInterface;
   public set controller(controller: ProductSingleComponentInterface | undefined) {
@@ -19,18 +25,11 @@ import { FormControl, FormGroup } from '@angular/forms';
     return this._controller;
   }
 
-  private _product: PizzaModel;
-  public set product(product: undefined | PizzaModel) {
-    this._product = product;
-    this.initialize();
-  }
-  public get product(): undefined | PizzaModel {
-    return this._product;
-  }
-
   constructor(
     private readonly domain: ProductsDomainService,
-    private readonly toppingsDomain: PizzaToppingsDomainService
+    private readonly toppingsDomain: PizzaToppingsDomainService,
+    private readonly toasterNotificationsService: ToasterNotificationsService,
+    private readonly router: Router
   ) {
 
   }
@@ -38,10 +37,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   private initialize(): void {
     if (this._controller) {
       this._controller.loading = true;
-      if (this.isCompleteModel(this._controller.product)) {
-        // creating a new instance of the object will prevent possible bugs due to unfinished updates
-        // this._controller.product = JSON.parse(JSON.stringify(this._controller.product));
-        this.initializeEnd();
+      if (this._controller.action === 'create') {
+        this.initialize2Create();
       } else {
         const id = this.getModelId(this._controller.product);
         if (id) {
@@ -49,7 +46,7 @@ import { FormControl, FormGroup } from '@angular/forms';
             take(1)
           ).subscribe(
             {
-              next: this.initialize2.bind(this),
+              next: this.initialize2Update.bind(this),
               complete: this.initializeEnd.bind(this),
               error: this.onAPIError.bind(this)
             }
@@ -59,19 +56,44 @@ import { FormControl, FormGroup } from '@angular/forms';
     }
   }
 
-  private initialize2(product: PizzaModel): void {
-    if (this._controller && this._controller.mode) {
+  private initialize2Create(): void {
+    if (this._controller) {
+      this._controller.product = new PizzaAdapterModel({});
+      this._controller.pizzaNameFormControl = new FormControl();
+      this._controller.pizzaNameFormControl.setValue('');
+      this.handleNameChange();
+      this._controller.pizzaFormGroup = new FormGroup({
+        name: this._controller.pizzaNameFormControl
+      });
+      this.initialize3();
+    }
+  }
+
+  private initialize2Update(product: PizzaModel): void {
+    if (this._controller) {
       this._controller.product = product;
-      if (this._controller.mode !== 'minimal') {
-        this._controller.pizzaNameFormControl = new FormControl();
-        // this._controller.pizzaNameFormControl.setValue('');
-        this._controller.pizzaFormGroup = new FormGroup({
-          name: this._controller.pizzaNameFormControl
-        });
-        this.initialize3();
-      } else {
-        this.initializeEnd();
+      this._controller.pizzaNameFormControl = new FormControl();
+      this._controller.pizzaNameFormControl.setValue(product.name);
+      this.handleNameChange();
+      this._controller.pizzaFormGroup = new FormGroup({
+        name: this._controller.pizzaNameFormControl
+      });
+      this.initialize3();
+    }
+  }
+
+  private handleNameChange(): void {
+    if (this._controller && this._controller.pizzaNameFormControl) {
+      if (this.productNameChangeSubscription) {
+        this.productNameChangeSubscription.unsubscribe();
       }
+      this.productNameChangeSubscription = this._controller.pizzaNameFormControl.valueChanges.subscribe(
+        (name: string): void => {
+          if (this._controller && this._controller.product) {
+            this._controller.product.name = name;
+          }
+        }
+      )
     }
   }
 
@@ -121,18 +143,63 @@ import { FormControl, FormGroup } from '@angular/forms';
     return undefined;
   }
 
-  private isCompleteModel(model: PizzaModel | undefined): boolean {
-    if (model) {
-      if (
-        (model.id && typeof model.id === 'string' && model.id.length > 0)
-        && (model.name && typeof model.name === 'string' && model.name.length > 0)
-        && (model.toppings && Array.isArray(model.toppings))
-        && (model.creationDate && typeof model.creationDate === 'number')
-      ) {
-        return true;
+  submit(): void {
+    if (this._controller && this._controller.product) {
+      this._controller.loading = true;
+      this._controller.refreshRender();
+      const product: PizzaModel = this._controller.product;
+      if (this._controller.action === 'create') {
+        this.submitCreate(product);
+      } else if (this.controller.action === 'update') {
+        this.submitUpdate(product);
       }
     }
-    return false;
+  }
+
+  private submitCreate(product: PizzaModel): void {
+    this.domain.create(product).pipe(
+      take(1)
+    ).subscribe(
+      {
+        next: () => {
+          this.router.navigate(['/products/list'])
+          this.toasterNotificationsService.success(
+            'Creación Exitosa',
+            `Se ha creado Pizza: ${product.name}`
+          );
+        },
+        complete: () => {
+          if (this._controller) {
+            this._controller.loading = false;
+            this._controller.refreshRender();
+          }
+        },
+        error: this.onAPIError.bind(this)
+      }
+    );
+  }
+
+  private submitUpdate(product: PizzaModel): void {
+    this.domain.update(product).pipe(
+      take(1)
+    ).subscribe(
+      {
+        next: () => {
+          this.router.navigate(['/products/list'])
+          this.toasterNotificationsService.success(
+            'Actualización Exitosa',
+            `Se ha actualizado la Pizza.`
+          );
+        },
+        complete: () => {
+          if (this._controller) {
+            this._controller.loading = false;
+            this._controller.refreshRender();
+          }
+        },
+        error: this.onAPIError.bind(this)
+      }
+    );
   }
 
 }
