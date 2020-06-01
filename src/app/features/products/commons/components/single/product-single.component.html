@@ -5,7 +5,7 @@
   </app-product-pizza-display-component>
 </div>
 <form
-  *ngIf="this._mode !== 'minimal' && !loading && pizzaFormGroup"
+  *ngIf="!loading && pizzaFormGroup"
   [formGroup]="pizzaFormGroup">
   <div class="pizza-name">
     Nombre de Pizza:

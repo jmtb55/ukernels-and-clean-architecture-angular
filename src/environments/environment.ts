@@ -7,8 +7,8 @@ export const environment: EnvironmentModel = {
     contexts: {
       authentication: '',
       orders: '',
-      products: 'api/pizza/v1',
-      pizzaToppings: 'api/pizza-toppings/v1'
+      products: 'api/pizza/v0',
+      pizzaToppings: 'api/pizza-toppings/v0'
     }
   },
   isProductionBuild: false
