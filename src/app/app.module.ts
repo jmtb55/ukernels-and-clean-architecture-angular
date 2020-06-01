@@ -27,10 +27,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
      * Hash in routes improves consistency of behavior on deployments.
      */
     RouterModule.forRoot(
-      appRoutes,
-      {
-        useHash: true
-      }
+      appRoutes
     )
   ],
   bootstrap: [AppComponent]
