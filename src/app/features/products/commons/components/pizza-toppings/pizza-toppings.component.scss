@@ -36,7 +36,7 @@ $green: rgb(15, 150, 117);
 .topping-single.selected:after {
   content: '';
   border-radius: 50%;
-  background: #19b55f url(/assets/img/checked.svg) no-repeat center center;
+  background: #19b55f url("/assets/img/checked.svg") no-repeat center center;
   width: 16px;
   height: 16px;
   position: absolute;
