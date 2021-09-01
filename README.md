@@ -25,7 +25,7 @@ This pattern will reflect itself on a folder structure such as:
     ├── feature-1
     │   └── feature-1.module.ts    
     └── feature-n
-		└── feature-n.module.ts 
+        └── feature-n.module.ts 
 ```
 
 
