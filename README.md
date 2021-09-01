@@ -84,7 +84,7 @@ A nivel de carpetas, se consideran una carpeta por cada capa (algunos módulos n
     │   └── repository
     |       ├── feature-n-repository.module.ts
     |       └── context-n
-    |			├── context-n.repository.service.ts
+    |            ├── context-n.repository.service.ts
     |         	 ├── entity-n.entity.ts (optional)
     |         	 └── entity-n.adapter.entity.ts (optional)
     └── views
