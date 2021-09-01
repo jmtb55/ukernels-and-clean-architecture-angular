@@ -3,7 +3,7 @@ import { ProductPizzaDisplayComponent } from '../pizza-display/pizza-display.com
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ProductsListComponent } from './list.component';
-import { inject, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ProductsListPresenterService } from '../../presenters/products-list-presenter.service';
 import { Router } from '@angular/router';
 import { PizzaModel } from '../../domain/pizza/pizza.model';
